@@ -1,7 +1,7 @@
 <div align="center">
 <img alt="Кошка" align="center" src="header.png"/>
 <br/>
-<h2>Meow-ster of cat-alogs!</h2>
+<h2>Meow-ster of cat-alogs 🐱 !</h2>
 </div>
 <br/>
 <div align="justify">

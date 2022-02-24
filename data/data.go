@@ -2,18 +2,11 @@ package data
 
 import (
 	"database/sql"
+	"fmt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"path/filepath"
+	"gorm.io/gorm/logger"
 )
-
-const (
-	FRBDataBase  = "frbs.db"
-	RRATDataBase = "rrats.db"
-	PSRDataBase  = "pulsars.db"
-)
-
-var Here, _ = filepath.Abs(".")
 
 type Pulsar struct {
 	ID           int64
@@ -396,8 +389,8 @@ type Pulsar struct {
 }
 
 func GetPulsars(jname string) []Pulsar {
-	db, _ := gorm.Open(sqlite.Open(filepath.Join(Here, PSRDataBase)))
+	db, _ := gorm.Open(sqlite.Open("./data/pulsars.db"), &gorm.Config{Logger: logger.Default.LogMode(logger.Silent)})
 	Pulsars := make([]Pulsar, 0)
-	db.Find(&Pulsars)
+	db.Where("JNAME LIKE ?", fmt.Sprintf("%%%s%%", jname)).Find(&Pulsars)
 	return Pulsars
 }
