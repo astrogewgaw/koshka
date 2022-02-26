@@ -1,6 +1,8 @@
 package app
 
 import (
+	"fmt"
+
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/textinput"
 
@@ -54,6 +56,15 @@ func (C *Cat) MoodyPaws() {
 	}
 }
 
+func (C *Cat) UpdateTableFooter() {
+	C.Table = C.Table.WithStaticFooter(
+		fmt.Sprintf(
+			"Pg. %d of %d | Total number of pulsars: %d.",
+			C.Table.CurrentPage(),
+			C.Table.MaxPages(),
+			C.Table.TotalRows()))
+}
+
 func (C *Cat) BrowseMood(msg tea.Msg) tea.Cmd {
 	var (
 		cmd  tea.Cmd
@@ -62,6 +73,8 @@ func (C *Cat) BrowseMood(msg tea.Msg) tea.Cmd {
 
 	C.Table, cmd = C.Table.Update(msg)
 	cmds = append(cmds, cmd)
+
+	C.UpdateTableFooter()
 
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
