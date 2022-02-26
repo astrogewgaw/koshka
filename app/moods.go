@@ -58,11 +58,12 @@ func (C *Cat) MoodyPaws() {
 
 func (C *Cat) UpdateTableFooter() {
 	C.Table = C.Table.WithStaticFooter(
-		fmt.Sprintf(
-			"Pg. %d of %d | Total number of pulsars: %d.",
-			C.Table.CurrentPage(),
-			C.Table.MaxPages(),
-			C.Table.TotalRows()))
+		TableFooterStyle.Render(
+			fmt.Sprintf(
+				"Pg. %d of %d | Total number of pulsars: %d.",
+				C.Table.CurrentPage(),
+				C.Table.MaxPages(),
+				C.Table.TotalRows())))
 }
 
 func (C *Cat) BrowseMood(msg tea.Msg) tea.Cmd {

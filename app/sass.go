@@ -65,6 +65,10 @@ var (
 				Background(lip.Color(C2)).
 				Foreground(lip.Color(C3))
 
+	TableFooterStyle = lip.NewStyle().
+				Bold(true).
+				Foreground(lip.Color(C3))
+
 	HelpStyle = lip.NewStyle().
 			BorderStyle(lip.RoundedBorder()).
 			BorderForeground(lip.Color(C4))

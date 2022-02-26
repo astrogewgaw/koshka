@@ -83,7 +83,28 @@ func Кошка() Cat {
 				WithPageSize(10).
 				WithRows(DataIntoTable("")).
 				HeaderStyle(TableColumnStyle).
-				HighlightStyle(TableRowSelectedStyle)
+				HighlightStyle(TableRowSelectedStyle).
+				Border(table.Border{
+					Top:    "─",
+					Left:   "│",
+					Right:  "│",
+					Bottom: "─",
+
+					TopRight:    "╮",
+					TopLeft:     "╭",
+					BottomRight: "╯",
+					BottomLeft:  "╰",
+
+					TopJunction:    "╥",
+					LeftJunction:   "├",
+					RightJunction:  "┤",
+					BottomJunction: "╨",
+					InnerJunction:  "╫",
+
+					InnerDivider: "║",
+
+					StyleBase: lip.NewStyle().BorderForeground(lip.Color(C3)),
+				})
 		}(),
 	}
 }
