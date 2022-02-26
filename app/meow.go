@@ -5,7 +5,6 @@ import (
 
 	"github.com/charmbracelet/bubbles/help"
 	"github.com/charmbracelet/bubbles/key"
-	"github.com/charmbracelet/bubbles/spinner"
 	"github.com/charmbracelet/bubbles/textinput"
 	"github.com/evertras/bubble-table/table"
 	"golang.org/x/term"
@@ -27,7 +26,6 @@ type Cat struct {
 	Paws   Paws
 	Help   help.Model
 	Table  table.Model
-	Spins  spinner.Model
 	Finder textinput.Model
 }
 
@@ -59,11 +57,6 @@ func Кошка() Cat {
 			}
 		}(),
 		Help: help.New(),
-		Spins: func() spinner.Model {
-			sp := spinner.New()
-			sp.Spinner = spinner.Dot
-			return sp
-		}(),
 		Finder: func() textinput.Model {
 			tx := textinput.New()
 			tx.Prompt = "❯ "
@@ -118,6 +111,7 @@ func (C Cat) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		}
 	case SearchMsg:
 		C.Table = C.Table.WithRows(msg)
+		C.UpdateTableFooter()
 		return C, nil
 	}
 

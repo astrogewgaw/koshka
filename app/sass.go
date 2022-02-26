@@ -48,6 +48,7 @@ var (
 	SpinnerStyle      = lip.NewStyle()
 
 	ConsoleStyle = lip.NewStyle().
+			Foreground(lip.Color(C3)).
 			BorderForeground(lip.Color(C3)).
 			BorderStyle(lip.RoundedBorder())
 
@@ -56,7 +57,8 @@ var (
 				Align(lip.Center).
 				Foreground(lip.Color(C3))
 
-	TableRowNormalStyle = lip.NewStyle().Foreground(lip.Color(C3))
+	TableRowNormalStyle = lip.NewStyle().
+				Foreground(lip.Color(C3))
 
 	TableRowSelectedStyle = lip.NewStyle().
 				Bold(true).
@@ -81,6 +83,8 @@ var (
 func (C Cat) TitleBar() string { return TitleStyle.Render(C.Name) }
 
 func (C Cat) TableView() string {
+	var txt string
+
 	W := C.W - (2 * BS)
 	H := C.H -
 		lip.Height(C.TitleBar()) -
@@ -89,13 +93,19 @@ func (C Cat) TableView() string {
 		lip.Height(C.MoodyBar()) -
 		(2 * BS)
 
+	if C.Table.TotalRows() != 0 {
+		txt = C.Table.View()
+	} else {
+		txt = "No pulsars found."
+	}
+
 	return ConsoleStyle.Render(
 		lip.Place(
 			W,
 			H,
 			lip.Center,
 			lip.Center,
-			C.Table.View()))
+			txt))
 }
 
 func (C Cat) FinderView() string {
