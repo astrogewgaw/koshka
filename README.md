@@ -26,6 +26,8 @@ install it via their respective package managers. So, if you use this and find i
 let me know by staring the repository :star:, spreading the word :speech_balloon:, and/or
 contacting me directly (details on my home page).
 
+### Usage
+
 Right now, the only way to run **Кошка** is:
 
 ```bash
@@ -37,13 +39,15 @@ go run .
 where I have assumed that you have the latest version of Go installed. If not, you can
 check out how to install Go [**here**][go_install].
 
-Here is a preview:
+### Preview
 
 <img
     align="center"
     src="koshka.gif"
     alt="Кошка Preview GIF"
 />
+
+### Acknowledgements
 
 This project could not have been built without the [**psrqpy**][psrqpy] package, written in
 Python and developed by [**Matt Pitkin**][mattpitkin], or the entire ecosystem of libraries
