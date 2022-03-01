@@ -12,10 +12,8 @@ github.com/containerd/console v1.0.2/go.mod h1:ytZPjGgY2oeTkAONYafi2kSj0aYggsf8a
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
-github.com/evertras/bubble-table v0.5.0 h1:tr63EZ6VzhaI0tCg9QFpmlDKVIi7z7okvZgSDUpgo3k=
-github.com/evertras/bubble-table v0.5.0/go.mod h1:3PxdsuizEvCsOackJ5FYRZURpdYI6G0K4q/LFEPDa94=
-github.com/evertras/bubble-table v0.6.2-0.20220226123549-81ec6eb211c8 h1:koJwsZD0pTwKsk7GcZoqTUCK213msaaTClk6Ym/eM/Q=
-github.com/evertras/bubble-table v0.6.2-0.20220226123549-81ec6eb211c8/go.mod h1:3PxdsuizEvCsOackJ5FYRZURpdYI6G0K4q/LFEPDa94=
+github.com/evertras/bubble-table v0.6.4-0.20220228145326-adac7709eeb3 h1:T3GpJEl0pHG2i7v8JsrTLxzXS+xGBgAJo9T2pDoNS/U=
+github.com/evertras/bubble-table v0.6.4-0.20220228145326-adac7709eeb3/go.mod h1:3PxdsuizEvCsOackJ5FYRZURpdYI6G0K4q/LFEPDa94=
 github.com/jinzhu/inflection v1.0.0 h1:K317FqzuhWc8YvSVlFMCCUb36O/S9MCKRDI7QkRKD/E=
 github.com/jinzhu/inflection v1.0.0/go.mod h1:h+uFLlag+Qp1Va5pdKtLDYj+kHp5pxUVkryuEj+Srlc=
 github.com/jinzhu/now v1.1.2/go.mod h1:d3SSVoowX0Lcu0IBviAWJpolVfI5UJVZZ7cO71lE/z8=

@@ -13,7 +13,6 @@ type Paws struct {
 	ClearSearch     key.Binding
 	ToggleFullHelp  key.Binding
 	CancelSearching key.Binding
-	AcceptSearching key.Binding
 }
 
 func (P Paws) ShortHelp() []key.Binding {
@@ -22,8 +21,8 @@ func (P Paws) ShortHelp() []key.Binding {
 
 func (P Paws) FullHelp() [][]key.Binding {
 	return [][]key.Binding{
-		{P.ToggleFullHelp, P.Quit, P.ForceQuit},
+		{P.ToggleFullHelp, P.Quit, P.ForceQuit, P.Search},
 		{P.RowUp, P.RowDown, P.NextPage, P.PrevPage},
-		{P.Search, P.ClearSearch, P.CancelSearching, P.AcceptSearching},
+		{P.ClearSearch, P.CancelSearching},
 	}
 }

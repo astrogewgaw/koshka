@@ -6,7 +6,7 @@ require (
 	github.com/charmbracelet/bubbles v0.10.3
 	github.com/charmbracelet/bubbletea v0.19.3
 	github.com/charmbracelet/lipgloss v0.4.0
-	github.com/evertras/bubble-table v0.6.2-0.20220226123549-81ec6eb211c8
+	github.com/evertras/bubble-table v0.6.4-0.20220228145326-adac7709eeb3
 	golang.org/x/term v0.0.0-20210422114643-f5beecf764ed
 	gorm.io/driver/sqlite v1.2.6
 	gorm.io/gorm v1.22.5

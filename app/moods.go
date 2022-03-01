@@ -1,11 +1,8 @@
 package app
 
 import (
-	"fmt"
-
 	"github.com/charmbracelet/bubbles/key"
 	"github.com/charmbracelet/bubbles/textinput"
-
 	tea "github.com/charmbracelet/bubbletea"
 )
 
@@ -14,14 +11,12 @@ type Mood int
 const (
 	Browsing  Mood = 0
 	Searching Mood = 1
-	Searched  Mood = 2
 )
 
 func (M Mood) String() string {
 	return [...]string{
-		"Browsing...",
-		"Searching...",
-		"Seacrhed.",
+		"  Browsing...",
+		"🔎 Searching...",
 	}[M]
 }
 
@@ -38,7 +33,6 @@ func (C *Cat) MoodyPaws() {
 		C.Paws.PrevPage.SetEnabled(false)
 		C.Paws.ToggleFullHelp.SetEnabled(false)
 		C.Paws.CancelSearching.SetEnabled(true)
-		C.Paws.AcceptSearching.SetEnabled(C.Finder.Value() != "")
 	default:
 		C.Finder.Reset()
 		C.Finder.Blur()
@@ -52,18 +46,7 @@ func (C *Cat) MoodyPaws() {
 		C.Paws.ClearSearch.SetEnabled(false)
 		C.Paws.ToggleFullHelp.SetEnabled(true)
 		C.Paws.CancelSearching.SetEnabled(false)
-		C.Paws.AcceptSearching.SetEnabled(false)
 	}
-}
-
-func (C *Cat) UpdateTableFooter() {
-	C.Table = C.Table.WithStaticFooter(
-		TableFooterStyle.Render(
-			fmt.Sprintf(
-				"Pg. %d of %d | Total number of pulsars: %d.",
-				C.Table.CurrentPage(),
-				C.Table.MaxPages(),
-				C.Table.TotalRows())))
 }
 
 func (C *Cat) BrowseMood(msg tea.Msg) tea.Cmd {
@@ -74,8 +57,7 @@ func (C *Cat) BrowseMood(msg tea.Msg) tea.Cmd {
 
 	C.Table, cmd = C.Table.Update(msg)
 	cmds = append(cmds, cmd)
-
-	C.UpdateTableFooter()
+	C.UpdateFooter()
 
 	switch msg := msg.(type) {
 	case tea.KeyMsg:
@@ -105,18 +87,7 @@ func (C *Cat) SearchMood(msg tea.Msg) tea.Cmd {
 		case key.Matches(msg, C.Paws.CancelSearching):
 			C.Mood = Browsing
 			C.MoodyPaws()
-		case key.Matches(msg, C.Paws.AcceptSearching):
-			C.Mood = Searched
-			C.MoodyPaws()
-
-			if C.Table.TotalRows() == 0 {
-				C.Finder.Reset()
-				break
-			}
-
-			if C.Finder.Value() == "" {
-				C.Finder.Reset()
-			}
+			C.UpdateTable(AllData())
 		}
 	}
 
@@ -127,7 +98,7 @@ func (C *Cat) SearchMood(msg tea.Msg) tea.Cmd {
 		cmds = append(cmds, Input)
 
 		if InputChanged {
-			cmds = append(cmds, ApplySearch(*C))
+			cmds = append(cmds, ApplySearch(C))
 		}
 	}
 

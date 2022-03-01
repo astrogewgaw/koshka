@@ -37,6 +37,14 @@ go run .
 where I have assumed that you have the latest version of Go installed. If not, you can
 check out how to install Go [**here**][go_install].
 
+Here is a preview:
+
+<img
+    align="center"
+    src="koshka.gif"
+    alt="Кошка Preview GIF"
+/>
+
 This project could not have been built without the [**psrqpy**][psrqpy] package, written in
 Python and developed by [**Matt Pitkin**][mattpitkin], or the entire ecosystem of libraries
 created by the [**Charm Project**][charm], such as the [**Bubbletea**][bubbletea] library,

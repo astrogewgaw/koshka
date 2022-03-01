@@ -14,10 +14,9 @@ const (
 // Color scheme.
 const (
 	C0 = "#000000"
-	C1 = "#FF6600"
-	C2 = "#990000"
-	C3 = "#F7F7CF"
-	C4 = "#3C3C3C"
+	C1 = "#DF2E2E"
+	C2 = "#FFF7AE"
+	C3 = "#3C3C3C"
 )
 
 var (
@@ -27,18 +26,18 @@ var (
 			Bold(true).
 			Padding(0, 1).
 			Margin(1, 1, 1, 1).
-			Foreground(lip.Color(C3)).
-			Background(lip.Color(C2))
+			Foreground(lip.Color(C2)).
+			Background(lip.Color(C1))
 
 	DescStyle = lip.NewStyle().
 			Italic(true).
 			Margin(0, 0, 1, 0).
 			Padding(0, 1, 0, 2).
-			Foreground(lip.Color(C3))
+			Foreground(lip.Color(C2))
 
 	SearchBarStyle = lip.NewStyle().
 			BorderStyle(lip.RoundedBorder()).
-			BorderForeground(lip.Color(C3))
+			BorderForeground(lip.Color(C2))
 
 	SearchTextStyle   = lip.NewStyle()
 	SearchPromptStyle = lip.NewStyle()
@@ -48,34 +47,48 @@ var (
 	SpinnerStyle      = lip.NewStyle()
 
 	ConsoleStyle = lip.NewStyle().
-			Foreground(lip.Color(C3)).
-			BorderForeground(lip.Color(C3)).
+			Foreground(lip.Color(C2)).
+			BorderForeground(lip.Color(C2)).
 			BorderStyle(lip.RoundedBorder())
+
+	TableStyle = lip.NewStyle().
+			Foreground(lip.Color(C2)).
+			BorderForeground(lip.Color(C2))
 
 	TableColumnStyle = lip.NewStyle().
 				Bold(true).
 				Align(lip.Center).
-				Foreground(lip.Color(C3))
+				Foreground(lip.Color(C2))
 
 	TableRowNormalStyle = lip.NewStyle().
-				Foreground(lip.Color(C3))
+				Foreground(lip.Color(C2))
 
 	TableRowSelectedStyle = lip.NewStyle().
 				Bold(true).
-				Background(lip.Color(C2)).
-				Foreground(lip.Color(C3))
+				Background(lip.Color(C1)).
+				Foreground(lip.Color(C2))
 
 	TableFooterStyle = lip.NewStyle().
 				Bold(true).
-				Foreground(lip.Color(C3))
+				Foreground(lip.Color(C2))
 
 	HelpStyle = lip.NewStyle().
 			BorderStyle(lip.RoundedBorder()).
-			BorderForeground(lip.Color(C4))
+			BorderForeground(lip.Color(C3))
+
+	UnitsStyle = lip.NewStyle().
+			Foreground(lip.Color(C3)).
+			BorderStyle(lip.RoundedBorder()).
+			BorderForeground(lip.Color(C3)).
+			SetString(
+			"P: Period, in seconds.\n" +
+				"DM: Dispersion Measure, in pc per cm³\n" +
+				"P1: Period derivative; dimensionless.\n" +
+				"GL/GB: Galactic coordinates, in degrees.")
 
 	MoodyBarStyle = lip.NewStyle().
 			Foreground(lip.Color(C0)).
-			Background(lip.Color(C3))
+			Background(lip.Color(C2))
 
 	MoodyStyle = lip.NewStyle().
 			Inherit(MoodyBarStyle).
@@ -120,9 +133,16 @@ func (C Cat) FinderView() string {
 
 func (C Cat) HelpView() string {
 	return HelpStyle.
-		Width(C.W - 2).
 		Height(FHH - 2).
 		Render(C.Help.View(C.Paws))
+}
+
+func (C Cat) UnitsView() string {
+	return UnitsStyle.
+		Height(FHH - 2).
+		Align(lip.Right).
+		Width(C.W - lip.Width(C.HelpView()) - 2).
+		String()
 }
 
 func (C Cat) MoodyBar() string {

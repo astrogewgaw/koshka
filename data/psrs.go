@@ -389,10 +389,12 @@ type Pulsar struct {
 }
 
 type PulsarAPI struct {
-	ID   int64
 	PSRJ sql.NullString
 	DM   sql.NullFloat64
 	P0   sql.NullFloat64
+	P1   sql.NullFloat64
+	GL   sql.NullFloat64
+	GB   sql.NullFloat64
 }
 
 func GetPulsars(Name string) []PulsarAPI {
