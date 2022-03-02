@@ -13,7 +13,7 @@ type SearchMsg []table.Row
 
 func DataIntoTable(search string) []table.Row {
 	var rows []table.Row
-	psrs := data.GetPulsars(search)
+	psrs := data.SearchPulsars(search)
 	for _, psr := range psrs {
 		rows = append(
 			rows,
@@ -21,10 +21,10 @@ func DataIntoTable(search string) []table.Row {
 				table.RowData{
 					"PSRJ": psr.PSRJ.String,
 					"P0":   fmt.Sprintf("%f", psr.P0.Float64),
-					"P1":   fmt.Sprintf("%f", psr.P1.Float64),
-					"DM":   fmt.Sprintf("%f", psr.DM.Float64),
-					"GL":   fmt.Sprintf("%f", psr.GL.Float64),
-					"GB":   fmt.Sprintf("%f", psr.GB.Float64),
+					"P1":   fmt.Sprintf("%.3e", psr.P1.Float64),
+					"DM":   fmt.Sprintf("%.3f", psr.DM.Float64),
+					"GL":   fmt.Sprintf("%.3f", psr.GL.Float64),
+					"GB":   fmt.Sprintf("%.3f", psr.GB.Float64),
 				}).WithStyle(TableRowNormalStyle))
 	}
 	return rows
@@ -37,6 +37,12 @@ func ApplySearch(C *Cat) tea.Cmd {
 	msg := SearchMsg(DataIntoTable(str))
 	cmd := func() tea.Msg { return msg }
 	return cmd
+}
+
+func SaveSearch(C *Cat) {
+	str := C.Finder.Value()
+	psrs := data.GetPulsars(str)
+	data.SavePulsars(psrs)
 }
 
 func CreateEmptyTable() table.Model {

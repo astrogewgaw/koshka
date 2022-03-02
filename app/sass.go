@@ -7,7 +7,7 @@ const (
 	BS  = 1 // Border size.
 	THH = 3 // Height of the table header, with borders.
 	TFH = 3 // Height of the table footer, with borders.
-	FHH = 6 // Height of the full help menu, with borders.
+	FHH = 7 // Height of the full help menu, with borders.
 	SHH = 3 // Height of the short help menu, with borders.
 )
 
@@ -76,10 +76,10 @@ var (
 			BorderStyle(lip.RoundedBorder()).
 			BorderForeground(lip.Color(C3))
 
-	UnitsStyle = lip.NewStyle().
-			Foreground(lip.Color(C3)).
+	CommentsStyle = lip.NewStyle().
+			Foreground(lip.Color(C2)).
+			BorderForeground(lip.Color(C2)).
 			BorderStyle(lip.RoundedBorder()).
-			BorderForeground(lip.Color(C3)).
 			SetString(
 			"P: Period, in seconds.\n" +
 				"DM: Dispersion Measure, in pc per cm³\n" +
@@ -137,8 +137,8 @@ func (C Cat) HelpView() string {
 		Render(C.Help.View(C.Paws))
 }
 
-func (C Cat) UnitsView() string {
-	return UnitsStyle.
+func (C Cat) CommentsView() string {
+	return CommentsStyle.
 		Height(FHH - 2).
 		Align(lip.Right).
 		Width(C.W - lip.Width(C.HelpView()) - 2).

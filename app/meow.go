@@ -32,6 +32,7 @@ func CreatePaws() Paws {
 		ClearSearch:     key.NewBinding(key.WithKeys("esc"), key.WithHelp("Esc", "Clear search.")),
 		ToggleFullHelp:  key.NewBinding(key.WithKeys("?"), key.WithHelp("?", "Toggle full help.")),
 		CancelSearching: key.NewBinding(key.WithKeys("esc"), key.WithHelp("Esc", "Cancel search.")),
+		SaveSearchData:  key.NewBinding(key.WithKeys("ctrl+s"), key.WithHelp("Ctrl+S", "Save your search.")),
 	}
 }
 
@@ -90,8 +91,12 @@ func (C Cat) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 				THH - TFH - (FHH - SHH))
 
 	case tea.KeyMsg:
-		if key.Matches(msg, C.Paws.ForceQuit) {
+		switch {
+		case key.Matches(msg, C.Paws.ForceQuit):
 			return C, tea.Quit
+		case key.Matches(msg, C.Paws.SaveSearchData):
+			SaveSearch(&C)
+			return C, nil
 		}
 	case SearchMsg:
 		C.UpdateTable(msg)
@@ -116,7 +121,7 @@ func (C Cat) View() string {
 		lip.JoinHorizontal(
 			lip.Bottom,
 			C.HelpView(),
-			C.UnitsView(),
+			C.CommentsView(),
 		),
 		C.MoodyBar())
 }
